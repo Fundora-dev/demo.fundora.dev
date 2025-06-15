@@ -178,63 +178,84 @@ export const Navbar: React.FC = () => {
           </div>
         </div>
 
-      {/* Mobile menu */}
+      {/* Mobile menu overlay and menu */}
       {isMobileMenuOpen && (
-        <div className={mobileDropDownStyle.replace(/\s\s+/g, ' ').trim()} id="mobile-menu"> 
-            <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-              {commonLinks}
-              {roleSpecificLinks}
-            </div>
-            <div className="pt-4 pb-3 border-t border-slate-900/10">
-              {currentUser ? (
-                <div className="flex items-center px-5">
-                  <div className="flex-shrink-0">
-                    <img className="h-10 w-10 rounded-full border-2 border-slate-300/70" src={currentUser.avatarUrl} alt={currentUser.name} />
-                  </div>
-                  <div className="ml-3">
-                    <div className="text-base font-medium leading-none text-slate-800">{currentUser.name}</div>
-                    <div className="text-sm font-medium leading-none text-[#0A6CFF]">{currentUser.role}</div>
-                  </div>
-                </div>
-              ) : (
-                <div className="mt-3 px-2 space-y-1">
-                  <UserCircleIcon className="w-8 h-8 text-[#0A6CFF] mx-auto mb-2"/>
-                  <p className="text-center text-slate-700 text-sm">未ログイン</p>
-                </div>
-              )}
-              <div className="mt-3 px-2 space-y-2">
+        <>
+          {/* グラスモーフィズムの全画面オーバーレイ（黒/グレー半透明＋blur） */}
+          <div
+            className="fixed inset-0 z-40 bg-black/90 backdrop-blur-md transition-all duration-200"
+            onClick={() => setIsMobileMenuOpen(false)}
+          />
+          {/* メニュー本体 */}
+          <div className="fixed inset-0 z-50 flex justify-center items-center h-screen">
+            <button
+              className="absolute top-6 right-6 text-3xl text-white bg-gray-800/80 rounded-full p-2 shadow-md"
+              onClick={() => setIsMobileMenuOpen(false)}
+              aria-label="メニューを閉じる"
+            >
+              <XMarkIcon className="w-8 h-8" />
+            </button>
+            <nav className="w-full max-w-xs mx-auto flex flex-col items-center justify-center bg-gray-900/95 rounded-2xl shadow-xl py-8 px-4 backdrop-blur-lg border border-white/10">
+              <div className="flex flex-col items-center w-full h-[60vh] justify-center overflow-y-auto space-y-4">
+                {NAV_LINKS.map(link => (
+                  <NavLink
+                    key={link.name}
+                    to={link.path}
+                    className={({ isActive }) =>
+                      `w-full text-center text-lg font-semibold px-4 py-3 rounded-lg transition-colors duration-150 ${isActive ? 'bg-[#0A6CFF]/90 text-white shadow' : 'text-white bg-gray-800/60 hover:bg-[#0A6CFF]/30'}`
+                    }
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    {link.name}
+                  </NavLink>
+                ))}
+                {currentUser?.role && USER_ROLE_SPECIFIC_NAV[currentUser.role]?.map(link => (
+                  <NavLink
+                    key={link.name}
+                    to={link.path}
+                    className={({ isActive }) =>
+                      `w-full text-center text-lg font-semibold px-4 py-3 rounded-lg transition-colors duration-150 ${isActive ? 'bg-[#8B5CF6]/90 text-white shadow' : 'text-white bg-gray-700/60 hover:bg-[#8B5CF6]/30'}`
+                    }
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    {link.name}
+                  </NavLink>
+                ))}
+              </div>
+              <div className="pt-8 w-full flex flex-col items-center space-y-3">
                 {currentUser ? (
                   <Button
-                    onClick={() => { logout(); setIsMobileMenuOpen(false); }}
+                    onClick={() => { setIsMobileMenuOpen(false); logout(); }}
                     variant="outline"
-                    size="md"
-                    className="w-full text-left justify-start"
+                    size="lg"
+                    className="w-full"
                   >
                     ログアウト
                   </Button>
                 ) : (
                   <>
                     <Button
-                      onClick={() => { loginAsInvestor(); setIsMobileMenuOpen(false); }}
+                      onClick={() => { setIsMobileMenuOpen(false); loginAsInvestor(); }}
                       variant="primary"
-                      size="md"
-                      className="w-full text-left justify-start"
+                      size="lg"
+                      className="w-full"
                     >
                       支援者としてログイン
                     </Button>
                     <Button
-                      onClick={() => { loginAsOwner(); setIsMobileMenuOpen(false); }}
+                      onClick={() => { setIsMobileMenuOpen(false); loginAsOwner(); }}
                       variant="secondary"
-                      size="md"
-                      className="w-full text-left justify-start"
+                      size="lg"
+                      className="w-full"
                     >
                       研究者としてログイン
                     </Button>
                   </>
                 )}
               </div>
-            </div>
-        </div>
+            </nav>
+          </div>
+        </>
       )}
     </nav>
   );
