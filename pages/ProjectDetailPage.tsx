@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState, useCallback } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { getProjectById, addInvestment } from '../services/mockData';
@@ -285,7 +284,7 @@ export const ProjectDetailPage: React.FC = () => {
               <h3 className="text-xl font-semibold text-[#0A6CFF] mb-3">このプロジェクトについて</h3>
               <p className="whitespace-pre-line">{project.description}</p>
               {project.videoUrl && (
-                <div className="aspect-w-16 aspect-h-9 my-6 rounded-xl overflow-hidden shadow-lg border border-slate-900/10">
+                <div className="my-6 rounded-xl overflow-hidden shadow-lg border border-slate-900/10 h-[320px]">
                   <iframe 
                     src={project.videoUrl.replace("watch?v=", "embed/")} 
                     title="プロジェクト動画" 

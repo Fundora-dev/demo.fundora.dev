@@ -11,8 +11,21 @@
   <style>
     body {
       font-family: 'Inter', 'Noto Sans JP', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-      background-image: linear-gradient(135deg, #F4FAFF 0%, #EEF3FF 100%); 
+      background-image: url('/img/NextLab_bg01.png');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      position: relative;
       color: #1E1E1E;
+    }
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      background: rgba(255,255,255,0.6);
+      pointer-events: none;
     }
     /* Custom scrollbar for refined Liquid Glass theme */
     ::-webkit-scrollbar {
@@ -59,7 +72,7 @@
 </script>
 <link rel="stylesheet" href="/index.css">
 </head>
-<body class="antialiased">
+<body id="parallax-bg" class="antialiased">
   <div id="root"></div>
   <script type="module" src="/index.tsx"></script>
 </body>

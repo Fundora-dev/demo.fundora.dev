@@ -1,4 +1,3 @@
-
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
@@ -14,3 +13,12 @@ root.render(
     <App />
   </React.StrictMode>
 );
+
+// パララックス背景制御
+window.addEventListener('scroll', () => {
+  const y = window.scrollY;
+  const bg = document.getElementById('parallax-bg');
+  if (bg) {
+    bg.style.backgroundPosition = `center ${-y * 0.3}px`;
+  }
+});
