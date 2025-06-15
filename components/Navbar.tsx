@@ -195,7 +195,26 @@ export const Navbar: React.FC = () => {
             >
               <XMarkIcon className="w-8 h-8" />
             </button>
-            <nav className="w-full max-w-xs mx-auto flex flex-col items-center justify-center bg-gray-900/95 rounded-2xl shadow-xl py-8 px-4 backdrop-blur-lg border border-white/10">
+            <nav className="w-full h-full flex flex-col items-center justify-center bg-gray-900/95 shadow-xl py-8 px-4 backdrop-blur-lg border-none">
+              {/* アカウント情報表示 */}
+              <div className="flex flex-col items-center mb-6 mt-10">
+                {currentUser ? (
+                  <>
+                    <img src={currentUser.avatarUrl} alt={currentUser.name} className="h-14 w-14 rounded-full border-2 border-slate-300/70 shadow mb-2" />
+                    <div className="text-white text-base font-semibold">{currentUser.name}</div>
+                    <div className="text-[#0A6CFF] text-sm font-medium">{currentUser.role}</div>
+                  </>
+                ) : (
+                  <>
+                    <div className="bg-gray-700 rounded-full h-14 w-14 flex items-center justify-center mb-2">
+                      <svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' strokeWidth={1.5} stroke='currentColor' className='w-8 h-8 text-gray-400'>
+                        <path strokeLinecap='round' strokeLinejoin='round' d='M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z' />
+                      </svg>
+                    </div>
+                    <div className="text-white text-base font-semibold">未ログイン</div>
+                  </>
+                )}
+              </div>
               <div className="flex flex-col items-center w-full h-[60vh] justify-center overflow-y-auto space-y-4">
                 {NAV_LINKS.map(link => (
                   <NavLink
