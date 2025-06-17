@@ -15,7 +15,7 @@ export const Footer: React.FC = () => {
           {/* Logo, Site Name & Short Description */}
           <div className="sm:col-span-2 md:col-span-2">
             <Link to="/" className="text-2xl font-bold text-[#0A6CFF] hover:text-[#0052CC] transition-colors mb-3 inline-block">
-              {SITE_NAME}
+              <img src="/img/NextLab_logo.png" alt="NextLab ロゴ" className="h-8 w-auto" />
             </Link>
             <p className="text-sm text-slate-600 mb-4 max-w-md md:max-w-none pr-4">
               {HERO_SUBTITLE}
