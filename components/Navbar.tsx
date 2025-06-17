@@ -117,7 +117,7 @@ export const Navbar: React.FC = () => {
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center">
               <Link to="/" className="flex-shrink-0 text-[#0A6CFF] text-xl font-bold hover:text-[#0052CC] transition-colors flex items-center">
-                <span>{SITE_NAME}</span>
+                <img src="/img/NextLab_logo.png" alt="NextLab ロゴ" className="h-8 w-auto mr-2" />
                 <span className="ml-2 px-2 py-0.5 rounded-md text-xs font-semibold bg-gradient-to-r from-[#8B5CF6] to-[#7038E0] text-white border border-transparent shadow-sm">
                   Demo
                 </span>
